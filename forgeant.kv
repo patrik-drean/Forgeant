@@ -1,0 +1,51 @@
+#:kivy 1.0.9
+
+<SmileWidget1>
+    size: 100, 100
+    source: 'images/1_smile.png'
+    size: 200, 200 / self.image_ratio
+
+<SmileWidget2>
+    size: 100, 100
+    source: 'images/2_smile.png'
+    size: 200, 200 / self.image_ratio
+
+<SmileWidget3>
+    size: 100, 100
+    source: 'images/3_smile.png'
+    size: 200, 200 / self.image_ratio
+
+<SmileWidget4>
+    size: 100, 100
+    source: 'images/4_smile.png'
+    size: 200, 200 / self.image_ratio
+
+<SmileWidget5>
+    size: 100, 100
+    source: 'images/5_smile.png'
+    size: 200, 200 / self.image_ratio
+
+
+
+<RootWidget>
+    Label:
+        font_size: 90
+        center_x: root.width / 2
+        top: root.top - 150
+        text: "How are you feeling today?"
+        color: 0,0,0,1
+
+    SmileWidget1:
+        pos: ((root.width / 5) * .0000001) + (root.width / 28) , root.top - 550
+
+    SmileWidget2:
+        pos: ((root.width / 5) * 1) + (root.width / 28) , root.top - 550
+
+    SmileWidget3:
+        pos: ((root.width / 5) * 2) + (root.width / 28) , root.top - 550
+
+    SmileWidget4:
+        pos: ((root.width / 5) * 3) + (root.width / 28) , root.top - 550
+
+    SmileWidget5:
+        pos: ((root.width / 5) * 4) + (root.width / 28), root.top - 550
