@@ -53,7 +53,7 @@ def record_feeling_submission_to_db(feeling_response):
     conn.close()
 
     # Close app
-    ForgeantApp.stop()
+    ForgeantApp().stop()
 
 # 5 smile widget images
 class SmileWidget1(Image):
