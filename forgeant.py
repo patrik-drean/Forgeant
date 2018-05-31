@@ -5,6 +5,7 @@ from kivy.graphics import Color, Ellipse
 from kivy.core.window import Window
 from kivy.config import Config
 from kivy.core.window import Window
+from kivy.graphics.svg import Svg
 import psycopg2, pprint
 
 pp = pprint.PrettyPrinter(indent=4)
