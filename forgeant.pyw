@@ -5,8 +5,12 @@ from kivy.graphics import Color, Ellipse
 from kivy.core.window import Window
 from kivy.config import Config
 from kivy.core.window import Window
-from kivy.graphics.svg import Svg
 import psycopg2, pprint
+
+##################### Initial Setup #######################
+# Indicate position of app window
+Window.left = 500
+Window.top = 400
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -21,8 +25,9 @@ conn = psycopg2.connect(
 # Open cursor to interact with database
 cur = conn.cursor()
 
+
 # Set initial window size
-Window.size = (800, 450)
+Window.size = (700, 350)
 
 # Turn off ability to exit screen
 Window.borderless = True
@@ -30,7 +35,7 @@ Window.borderless = True
 # Turn background clear
 Window.clearcolor = (1, 1, 1, 1)
 
-# Function to record response and close app
+##################### Function to record response and close app #######################
 def record_feeling_submission_to_db(feeling_response):
 
     # Developer printout
@@ -56,6 +61,7 @@ def record_feeling_submission_to_db(feeling_response):
     # Close app
     ForgeantApp().stop()
 
+##################### Smile and Root Widgets #######################
 # 5 smile widget images
 class SmileWidget1(Image):
 
@@ -87,15 +93,16 @@ class SmileWidget5(Image):
         if self.collide_point(*touch.pos):
             record_feeling_submission_to_db(5)
 
-
-# Base root widget
-class RootWidget(Widget):
-    pass
+if 31>5:
+    # Base root widget
+    class RootWidget(Widget):
+        remove_widget(SmileWidget1) 
 
 class ForgeantApp(App):
 
     def build(self):
         return RootWidget()
 
+##################### Run the app #######################
 if __name__ == '__main__':
     ForgeantApp().run()
