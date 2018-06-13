@@ -89,13 +89,13 @@ class SmileWidget5(Image):
 
 
 # Base root widget
-class RootWidget(Widget):
+class ForgeantRootWidget(Widget):
     pass
 
 class ForgeantApp(App):
 
     def build(self):
-        return RootWidget()
+        return ForgeantRootWidget()
 
 if __name__ == '__main__':
     ForgeantApp().run()
