@@ -10,6 +10,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
+from kivy.base import runTouchApp
+from kivy.properties import ObjectProperty
+
 
 ################################
 ### Window & database setup  ###
@@ -98,6 +101,9 @@ def run_initial_setup():
             'Name': 'hi',
             })
 
+def initial_setup_submit():
+    print('hi')
+
 ###########################
 ### ForgeantApp Widgets ###
 ###########################
@@ -143,35 +149,98 @@ class ForgeantApp(App):
         root = ForgeantRootWidget()
         return root
 
-########################
-### SetupApp Widgets ###
-########################
 
-class SetupRootWidget(Widget):
 
+######################################################################
+
+from kivy.uix.spinner import Spinner
+
+class CustomSpinner(Spinner):
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            record_feeling_submission_to_db(5)
+            initial_setup_submit()
 
-from kivy.uix.boxlayout import BoxLayout
 
-class LblTxt(BoxLayout):
-    from kivy.properties import ObjectProperty
-    theTxt = ObjectProperty(None)
 
 class CustomDropDown(DropDown):
     pass
+
 
 dropdown = CustomDropDown()
 mainbutton = Button(text='Hello', size_hint=(None, None))
 mainbutton.bind(on_release=dropdown.open)
 dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
+
+# create a dropdown with 10 buttons
+dropdown = DropDown()
+for index in range(10):
+    # When adding widgets, we need to specify the height manually
+    # (disabling the size_hint_y) so the dropdown can calculate
+    # the area it needs.
+
+    btn = Button(text='Value %d' % index, size_hint_y=None, height=44)
+
+    # for each button, attach a callback that will call the select() method
+    # on the dropdown. We'll pass the text of the button as the data of the
+    # selection.
+    btn.bind(on_release=lambda btn: dropdown.select(btn.text))
+
+    # then add the button inside the dropdown
+    dropdown.add_widget(btn)
+
+# create a big main button
+mainbutton = Button(text='Hello', size_hint=(None, None))
+
+# show the dropdown menu when the main button is released
+# note: all the bind() calls pass the instance of the caller (here, the
+# mainbutton instance) as the first argument of the callback (here,
+# dropdown.open.).
+mainbutton.bind(on_release=dropdown.open)
+
+# one last thing, listen for the selection in the dropdown list and
+# assign the data to the button text.
+dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+
+# runTouchApp(mainbutton)
+
+########################
+### SetupApp Widgets ###
+########################
+
+# spinner = Spinner(
+#     # default value shown
+#     text='Home',
+#     # available values
+#     values=('Home', 'Work', 'Other', 'Custom'),
+#     # just for positioning in our example
+#     size_hint=(None, None),
+#     size=(100, 44),
+#     pos_hint={'center_x': .5, 'center_y': .5})
+#
+# def show_selected_value(spinner, text):
+#     print('The spinner', spinner, 'have text', text)
+#
+# spinner.bind(text=show_selected_value)
+#
+# runTouchApp(spinner)
+
+
+
+class LblTxt(BoxLayout):
+    # self.ids.my_spinner.values = ['A', 'B']
+    theTxt = ObjectProperty(None)
+
+class MyLayout(BoxLayout):
+    pass
+
 class SetupApp(App):
 
     def build(self):
-        return
 
+        root = MyLayout()
+        root.add_widget(mainbutton)
+        return root
 
 ############################################
 ### Main method to actually run the apps ###
@@ -193,4 +262,4 @@ if __name__ == '__main__':
 
 
 
-# 11 hours
+# 12.8 hours
