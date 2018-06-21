@@ -12,6 +12,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.base import runTouchApp
 from kivy.properties import ObjectProperty
+from kivy.uix.label import Label
 
 
 ################################
@@ -149,97 +150,108 @@ class ForgeantApp(App):
         root = ForgeantRootWidget()
         return root
 
-
-
-######################################################################
-
-from kivy.uix.spinner import Spinner
-
-class CustomSpinner(Spinner):
-    def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
-            initial_setup_submit()
-
-
-
-class CustomDropDown(DropDown):
-    pass
-
-
-dropdown = CustomDropDown()
-mainbutton = Button(text='Hello', size_hint=(None, None))
-mainbutton.bind(on_release=dropdown.open)
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
-
-
-# create a dropdown with 10 buttons
-dropdown = DropDown()
-for index in range(10):
-    # When adding widgets, we need to specify the height manually
-    # (disabling the size_hint_y) so the dropdown can calculate
-    # the area it needs.
-
-    btn = Button(text='Value %d' % index, size_hint_y=None, height=44)
-
-    # for each button, attach a callback that will call the select() method
-    # on the dropdown. We'll pass the text of the button as the data of the
-    # selection.
-    btn.bind(on_release=lambda btn: dropdown.select(btn.text))
-
-    # then add the button inside the dropdown
-    dropdown.add_widget(btn)
-
-# create a big main button
-mainbutton = Button(text='Hello', size_hint=(None, None))
-
-# show the dropdown menu when the main button is released
-# note: all the bind() calls pass the instance of the caller (here, the
-# mainbutton instance) as the first argument of the callback (here,
-# dropdown.open.).
-mainbutton.bind(on_release=dropdown.open)
-
-# one last thing, listen for the selection in the dropdown list and
-# assign the data to the button text.
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
-
-# runTouchApp(mainbutton)
-
 ########################
 ### SetupApp Widgets ###
 ########################
 
-# spinner = Spinner(
-#     # default value shown
-#     text='Home',
-#     # available values
-#     values=('Home', 'Work', 'Other', 'Custom'),
-#     # just for positioning in our example
-#     size_hint=(None, None),
-#     size=(100, 44),
-#     pos_hint={'center_x': .5, 'center_y': .5})
-#
-# def show_selected_value(spinner, text):
-#     print('The spinner', spinner, 'have text', text)
-#
-# spinner.bind(text=show_selected_value)
-#
-# runTouchApp(spinner)
 
-
-
-class LblTxt(BoxLayout):
-    # self.ids.my_spinner.values = ['A', 'B']
-    theTxt = ObjectProperty(None)
-
-class MyLayout(BoxLayout):
+class RootLayout(BoxLayout):
     pass
 
-class SetupApp(App):
+class HeaderLayout(Label):
+    pass
+
+class SaveButton(Button):
+    def on_press(self):
+        print(self.id)
+
+class FormDropDown(DropDown):
+    pass
+
+class FormButton(Button):
+    pass
+
+class DropDownOptionButton(Button):
+    pass
+    # def on_press(self):
+    #     print(self.id)
+
+dropdown_list = []
+category_list = ['Department','Team','Tenure','Generation','Manager','Location', 'Test', 'Test']
+dropdown_options_list = [
+    ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Team 1','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['2-3 years','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['50+','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Tom','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ]
+
+
+for category_index, category in enumerate(category_list):
+    dropdown = FormDropDown()
+    dropdown_button = FormButton(text='Select an option')
+    dropdown_list.append(dropdown_button)
+    dropdown.bind(on_select=lambda instance, x: setattr(dropdown_list[0], 'text', x))
+
+    for option_index, option in enumerate(dropdown_options_list[category_index]):
+        btn = DropDownOptionButton(
+            text='{}'.format(option),
+            id= '{} {}'.format(category, option_index),
+            size_hint_y=None,
+            height=44)
+
+        btn.bind(on_release=lambda btn: dropdown.select(btn.text))
+        # btn.bind(on_press=print(btn.text))
+        dropdown.add_widget(btn)
+
+
+    # show the dropdown menu when the main button is released
+    # note: all the bind() calls pass the instance of the caller (here, the
+    # dropdown_button instance) as the first argument of the callback (here,
+    # dropdown.open.).
+    dropdown_button.bind(on_release=dropdown.open)
+    dropdown_button.bind(on_release=lambda x: print(dropdown_button.text))
+
+    # one last thing, listen for the selection in the dropdown list and
+    # assign the data to the button text
+
+
+
+
+
+
+# class LblTxt(BoxLayout):
+#     theTxt = ObjectProperty(None)
+#
+# class MyLayout(BoxLayout):
+#     pass
+
+class SetupApp(App, BoxLayout):
 
     def build(self):
+        Window.size = (1000, 600)
+        root = RootLayout()
+        layout = BoxLayout(orientation='vertical')
+        dropdown_layout = BoxLayout(orientation='vertical')
+        root.add_widget(layout)
+        root.add_widget(dropdown_layout)
+        
+        dropdown_layout.add_widget(Label())
 
-        root = MyLayout()
-        root.add_widget(mainbutton)
+        for index, dropdown_item in enumerate(dropdown_list):
+            # Pass if 3rd option. Bug TODO
+            if index == 3:
+                pass
+            else:
+                dropdown_layout.add_widget(dropdown_item)
+                dropdown_layout.add_widget(Label())
+
+        dropdown_layout.add_widget(Label())
+        dropdown_layout.add_widget(SaveButton(text='Hello', id='2'))
+        print(dropdown_button.id)
         return root
 
 ############################################
@@ -262,4 +274,4 @@ if __name__ == '__main__':
 
 
 
-# 12.8 hours
+# 14.3 hours
