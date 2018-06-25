@@ -15,9 +15,9 @@ from kivy.properties import ObjectProperty
 from kivy.uix.label import Label
 
 
-################################
-### Window & database setup  ###
-################################
+########################################################
+############### Window & database setup  ###############
+########################################################
 
 # Indicate position of app window
 # Window.left = 500
@@ -45,9 +45,9 @@ Window.borderless = True
 # Turn background clear
 Window.clearcolor = (1, 1, 1, 1)
 
-############################
-### Methods to be called ###
-############################
+#################################################################
+###################### Methods to be called #####################
+#################################################################
 
 # Record response and close app in ForgeantApp
 def record_feeling_submission_to_db(feeling_response):
@@ -105,9 +105,9 @@ def run_initial_setup():
 def initial_setup_submit():
     print('hi')
 
-###########################
-### ForgeantApp Widgets ###
-###########################
+#######################################################
+################# ForgeantApp Widgets #################
+#######################################################
 
 # 5 smile widget images
 class SmileWidget1(Image):
@@ -150,17 +150,16 @@ class ForgeantApp(App):
         root = ForgeantRootWidget()
         return root
 
-########################
-### SetupApp Widgets ###
-########################
+############################################################
+##################### SetupApp Widgets #####################
+############################################################
 
-dropdown_button_list = []
-category_list = ['Department','Team','Tenure', 'PASS', 'Generation','Manager','Location',]
+dropdown_button_list = {}
+category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
 dropdown_options_list = [
     ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
     ['Team 1','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
     ['2-3 years','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    [],
     ['50+','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
     ['Tom','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
     ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
@@ -176,8 +175,23 @@ class HeaderLayout(Label):
     pass
 
 class SaveButton(Button):
+
+    # Submit response if valid
     def on_press(self):
-        print(self.id)
+        all_responses_valid = True
+        for key, dropdown_button in dropdown_button_list.items():
+
+            # Change text if a response is not selected
+            if dropdown_button.text == 'Select an option':
+                dropdown_button.markup = True
+                dropdown_button.text = '[color=f45342][b]Select an option[/b][/color]'
+                all_responses_valid = False
+                print(dropdown_button.id)
+
+
+        # Submit signup response if valid
+        if all_responses_valid:
+            print('you did it!')
 
 class FormDropDown(DropDown):
     pass
@@ -186,117 +200,102 @@ class FormButton(Button):
     pass
 
 class DropDownOptionButton(Button):
-    # pass
-    def on_press(self):
-        print(self.id)
-        dropdown_list[1].bind(on_select=lambda instance, x: setattr(dropdown_button_list[1], 'text', x))
-        self.bind(on_release=lambda self: dropdown_list[1].select(self.text))
 
-dropdown_list = []
+    # When an option is selected, make the option shown on the main dropdown button
+    def on_press(self):
+        dropdown_list[self.id].bind(
+            on_select=lambda instance, x: setattr(dropdown_button_list[self.id], 'text', x)
+            )
+        self.bind(on_release=lambda self: dropdown_list[self.id].select(self.text))
+
+dropdown_list = {}
 
 for category_index, category in enumerate(category_list):
 
-    # Create dropdown and associated button
+
+    # Create dropdown and associated main button
     dropdown = FormDropDown()
     dropdown_button = FormButton(
         text='Select an option',
         id='dropdown_button_{}'.format(category_index),
         )
 
-    # Add to lists
-    dropdown_button_list.append(dropdown_button)
-    dropdown_list.append(dropdown)
+    # Add to dictionaries
+    dropdown_button_list[category] = dropdown_button
+    dropdown_list[category] = dropdown
 
-    # Bind button to dropdown
-    # dropdown_list[category_index].bind(on_select=lambda instance, x: setattr(dropdown_button_list[category_index], 'text', x))
-
-    # Add dropdown buttons to dropdown
+    # Add dropdown option buttons to dropdown
     for option_index, option in enumerate(dropdown_options_list[category_index]):
         btn = DropDownOptionButton(
             text='{}'.format(option),
-            id= '{} {}'.format(category, option_index),
+            id= '{}'.format(category),
             size_hint_y=None,
             height=44,
             background_normal = '',
             background_color = (.1, .3, .8, 1),
            )
 
-        # btn.bind(on_release=lambda btn: dropdown_list[category_index].select(btn.text))
-
         dropdown.add_widget(btn)
 
     # Have button open dropdown
-    dropdown_button_list[category_index].bind(on_release=dropdown_list[category_index].open)
+    dropdown_button_list[category].bind(on_release=dropdown_list[category].open)
 
-    dropdown_button_list[category_index].bind(on_release=lambda x: print(dropdown_button.text))
-
-
-
-
-
-
-
-# class LblTxt(BoxLayout):
-#     theTxt = ObjectProperty(None)
-#
-# class MyLayout(BoxLayout):
-#     pass
 
 class SetupApp(App, BoxLayout):
 
+    # Build the layout together
     def build(self):
+
+        # Window size
         Window.size = (800, 600)
+
+        # Layouts
         root = RootLayout()
         label_layout = BoxLayout(orientation='vertical',)
         dropdown_layout = BoxLayout(orientation='vertical',)
         buffer_layout1 = BoxLayout(orientation='vertical')
         buffer_layout2 = BoxLayout(orientation='vertical')
-
         root.add_widget(buffer_layout1)
         root.add_widget(label_layout)
         root.add_widget(dropdown_layout)
         root.add_widget(buffer_layout2)
 
+        # Labels on layout
         label_layout.add_widget(Label())
         for index, category_item in enumerate(category_list):
-            # Pass if 4th option. Bug TODO
-            if index == 3:
-                pass
-            else:
-                label_layout.add_widget(
-                    Label(
-                        text='[color=194CCC][b]{}[/b][/color]'.format(category_item),
-                        markup = True,
-                        )
+            label_layout.add_widget(
+                Label(
+                    text='[color=194CCC][b]{}[/b][/color]'.format(category_item),
+                    markup = True,
                     )
-                label_layout.add_widget(Label())
+                )
+            label_layout.add_widget(Label())
         label_layout.add_widget(Label())
         label_layout.add_widget(Label())
         label_layout.add_widget(Label())
 
+        # Dropdowns on layout
         dropdown_layout.add_widget(Label())
-        for index, dropdown_item in enumerate(dropdown_button_list):
-            # Pass if 4th option. Bug TODO
-            if index == 3:
-                pass
-            else:
-                dropdown_layout.add_widget(dropdown_item)
-                dropdown_layout.add_widget(Label())
-        dropdown_layout.add_widget(Label())
-        dropdown_layout.add_widget(SaveButton(
-                                        text='Submit',
-                                        id='2',
-                                        background_normal = '',
-                                        background_color = (.1, .3, .8, 1),
-                                        ))
+        for key, dropdown_item in dropdown_button_list.items():
+            dropdown_layout.add_widget(dropdown_item)
+            dropdown_layout.add_widget(Label())
         dropdown_layout.add_widget(Label())
 
-        print(dropdown_button.text)
+        # Save button
+        save_button = SaveButton(
+                        text='Submit',
+                        id='submission',
+                        background_normal = '',
+                        background_color = (.1, .3, .8, 1),
+                        )
+        dropdown_layout.add_widget(save_button)
+        dropdown_layout.add_widget(Label())
+
         return root
 
-############################################
-### Main method to actually run the apps ###
-############################################
+####################################################
+####### Main method to actually run the apps #######
+####################################################
 
 if __name__ == '__main__':
 
@@ -314,4 +313,12 @@ if __name__ == '__main__':
 
 
 
-# 14.3 hours
+# 16.2 hours
+
+
+
+# class LblTxt(BoxLayout):
+#     theTxt = ObjectProperty(None)
+#
+# class MyLayout(BoxLayout):
+#     pass
