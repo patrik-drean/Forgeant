@@ -178,16 +178,17 @@ class SaveButton(Button):
 
     # Submit response if valid
     def on_press(self):
+        print()
         all_responses_valid = True
         for key, dropdown_button in dropdown_button_list.items():
 
             # Change text if a response is not selected
-            if dropdown_button.text == 'Select an option':
+            if dropdown_button.text == 'Select an option' or dropdown_button.text == '[color=f45342][b]Select an option[/b][/color]':
                 dropdown_button.markup = True
                 dropdown_button.text = '[color=f45342][b]Select an option[/b][/color]'
                 all_responses_valid = False
-                print(dropdown_button.id)
 
+            print(dropdown_button.text)
 
         # Submit signup response if valid
         if all_responses_valid:
