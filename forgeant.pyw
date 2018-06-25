@@ -154,7 +154,7 @@ class ForgeantApp(App):
 ### SetupApp Widgets ###
 ########################
 
-dropdown_list = []
+dropdown_button_list = []
 category_list = ['Department','Team','Tenure', 'PASS', 'Generation','Manager','Location',]
 dropdown_options_list = [
     ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
@@ -179,7 +179,6 @@ class SaveButton(Button):
     def on_press(self):
         print(self.id)
 
-
 class FormDropDown(DropDown):
     pass
 
@@ -190,22 +189,28 @@ class DropDownOptionButton(Button):
     # pass
     def on_press(self):
         print(self.id)
-        print(dropdown_list[0])
+        dropdown_list[1].bind(on_select=lambda instance, x: setattr(dropdown_button_list[1], 'text', x))
+        self.bind(on_release=lambda self: dropdown_list[1].select(self.text))
 
-
-
-
-dropdown_list_test = []
+dropdown_list = []
 
 for category_index, category in enumerate(category_list):
+
+    # Create dropdown and associated button
     dropdown = FormDropDown()
     dropdown_button = FormButton(
         text='Select an option',
         id='dropdown_button_{}'.format(category_index),
         )
-    dropdown_list.append(dropdown_button)
-    dropdown.bind(on_select=lambda instance, x: setattr(dropdown_list[0], 'text', x))
 
+    # Add to lists
+    dropdown_button_list.append(dropdown_button)
+    dropdown_list.append(dropdown)
+
+    # Bind button to dropdown
+    # dropdown_list[category_index].bind(on_select=lambda instance, x: setattr(dropdown_button_list[category_index], 'text', x))
+
+    # Add dropdown buttons to dropdown
     for option_index, option in enumerate(dropdown_options_list[category_index]):
         btn = DropDownOptionButton(
             text='{}'.format(option),
@@ -216,17 +221,15 @@ for category_index, category in enumerate(category_list):
             background_color = (.1, .3, .8, 1),
            )
 
-        btn.bind(on_release=lambda btn: dropdown.select(btn.text))
-        # btn.bind(on_press=print(btn.text))
+        # btn.bind(on_release=lambda btn: dropdown_list[category_index].select(btn.text))
+
         dropdown.add_widget(btn)
 
-    dropdown_list_test.append(dropdown)
+    # Have button open dropdown
+    dropdown_button_list[category_index].bind(on_release=dropdown_list[category_index].open)
 
-    dropdown_button.bind(on_release=dropdown_list_test[category_index].open)
-    dropdown_button.bind(on_release=lambda x: print(dropdown_button.text))
+    dropdown_button_list[category_index].bind(on_release=lambda x: print(dropdown_button.text))
 
-    # one last thing, listen for the selection in the dropdown list and
-    # assign the data to the button text
 
 
 
@@ -272,7 +275,7 @@ class SetupApp(App, BoxLayout):
         label_layout.add_widget(Label())
 
         dropdown_layout.add_widget(Label())
-        for index, dropdown_item in enumerate(dropdown_list):
+        for index, dropdown_item in enumerate(dropdown_button_list):
             # Pass if 4th option. Bug TODO
             if index == 3:
                 pass
@@ -288,7 +291,7 @@ class SetupApp(App, BoxLayout):
                                         ))
         dropdown_layout.add_widget(Label())
 
-        print(dropdown_button.id)
+        print(dropdown_button.text)
         return root
 
 ############################################
