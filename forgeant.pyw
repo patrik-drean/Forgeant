@@ -25,17 +25,6 @@ from kivy.uix.label import Label
 
 pp = pprint.PrettyPrinter(indent=4)
 
-# Connect to database
-conn = psycopg2.connect(
-    database='incasokh',
-    user='incasokh',
-    password='tmWwE8HPOYjJmAOymB16_vtNO2GILb1i',
-    host='elmer.db.elephantsql.com',
-    port='5432')
-
-# Open cursor to interact with database
-cur = conn.cursor()
-
 # Set initial window size
 Window.size = (700, 350)
 
@@ -51,6 +40,17 @@ Window.clearcolor = (1, 1, 1, 1)
 
 # Record response and close app in ForgeantApp
 def record_feeling_submission_to_db(feeling_response):
+
+    # Connect to database
+    conn = psycopg2.connect(
+        database='incasokh',
+        user='incasokh',
+        password='tmWwE8HPOYjJmAOymB16_vtNO2GILb1i',
+        host='elmer.db.elephantsql.com',
+        port='5432')
+
+    # Open cursor to interact with database
+    cur = conn.cursor()
 
     # Developer printout
     print('The employee feeling response is: {}'.format(feeling_response))
@@ -182,7 +182,7 @@ class SaveButton(Button):
         all_responses_valid = True
         for key, dropdown_button in dropdown_button_list.items():
 
-            # Change text if a response is not selected
+            # Change text color if a response is not selected
             if dropdown_button.text == 'Select an option' or dropdown_button.text == '[color=f45342][b]Select an option[/b][/color]':
                 dropdown_button.markup = True
                 dropdown_button.text = '[color=f45342][b]Select an option[/b][/color]'
@@ -193,6 +193,7 @@ class SaveButton(Button):
         # Submit signup response if valid
         if all_responses_valid:
             print('you did it!')
+            # SetupApp().stop()
 
 class FormDropDown(DropDown):
     pass
@@ -304,17 +305,10 @@ if __name__ == '__main__':
     if check_for_initial_setup():
         # ForgeantApp().run()
         SetupApp().run()
+        # ForgeantApp().run()
     else:
         SetupApp().run()
         ForgeantApp().run()
-
-
-
-
-
-
-
-# 16.2 hours
 
 
 
@@ -323,3 +317,7 @@ if __name__ == '__main__':
 #
 # class MyLayout(BoxLayout):
 #     pass
+
+
+
+# 17.5 hours

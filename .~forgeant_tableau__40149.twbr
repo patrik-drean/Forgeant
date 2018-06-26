@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10500.18.0404.1406                               -->
+<workbook source-build='10.5.3 (10500.18.0404.1406)' source-platform='mac' version='10.5' xml:base='https://us-west-2b.online.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <repository-location id='forgeant_dashboard' path='/t/forgeant/workbooks' revision='1.3' site='forgeant' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='employee_submission (incasokh)' inline='true' name='federated.13n482m1ckb55d1bhnope0eovquh' version='10.5'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='elmer.db.elephantsql.com' name='postgres.18ufiau1s93pdw0zucoyx04suxh7'>
+            <connection authentication='username-password' class='postgres' dbname='incasokh' odbc-native-protocol='' one-time-sql='' port='5432' server='elmer.db.elephantsql.com' username='incasokh' workgroup-auth-mode='prompt' />
+          </named-connection>
+        </named-connections>
+        <relation connection='postgres.18ufiau1s93pdw0zucoyx04suxh7' name='employee_submission' table='[public].[employee_submission]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>id</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[id]</local-name>
+            <parent-name>[employee_submission]</parent-name>
+            <remote-alias>id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submission_value</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[submission_value]</local-name>
+            <parent-name>[employee_submission]</parent-name>
+            <remote-alias>submission_value</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submission_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[submission_date]</local-name>
+            <parent-name>[employee_submission]</parent-name>
+            <remote-alias>submission_date</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_TIMESTAMP&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_TIMESTAMP&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Count of Submissions' datatype='integer' name='[Calculation_2721018601453305856]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{ FIXED [submission_value] : COUNT([Number of Records]) }' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+      <column caption='Submission Date' datatype='datetime' name='[submission_date]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Submission Value' datatype='integer' name='[submission_value]' role='dimension' type='ordinal' />
+      <column-instance column='[submission_value]' derivation='None' name='[none:submission_value:ok]' pivot='key' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.519928' measure-ordering='alphabetic' measure-percentage='0.480072' rowDisplayCount='2' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:submission_value:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='Rating Breakdown' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Submission Value' />
+        <param name='target' value='Rating Breakdown' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='Average Monthly Rating'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column-instance column='[submission_value]' derivation='Avg' name='[avg:submission_value:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[submission_date]' derivation='Month' name='[mn:submission_date:ok]' pivot='key' type='ordinal' />
+            <column caption='Submission Date' datatype='datetime' name='[submission_date]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Submission Value' datatype='integer' name='[submission_value]' role='dimension' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]'>
+            <groupfilter function='level-members' level='[:Measure Names]' />
+          </filter>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:submission_value:qk]' value='n#,##0.00;-#,##0.00' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:submission_value:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run>&lt;</run>
+                <run>[federated.13n482m1ckb55d1bhnope0eovquh].[avg:submission_value:qk]</run>
+                <run>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[avg:submission_value:qk]</rows>
+        <cols>[federated.13n482m1ckb55d1bhnope0eovquh].[mn:submission_date:ok]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Rating Breakdown'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column-instance column='[submission_value]' derivation='None' name='[none:submission_value:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[pcto:sum:Number of Records:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Columns' type='PctTotal' />
+            </column-instance>
+            <column caption='Submission Date' datatype='datetime' name='[submission_date]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Submission Value' datatype='integer' name='[submission_value]' role='dimension' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[submission_date]' derivation='Year' name='[yr:submission_date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:submission_date:ok]' value='false' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:submission_value:ok]' value='Rating Value'>
+              <formatted-text>
+                <run>Rating Value</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:submission_date:ok]' value='Year' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='color' value='#898989' />
+            <format attr='font-size' value='8' />
+            <format attr='text-align' value='center' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <encodings>
+              <color column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:submission_value:ok]' />
+              <wedge-size column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+              <size column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[pcto:sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[yr:submission_date:ok]</rows>
+        <cols />
+      </table>
+    </worksheet>
+    <worksheet name='Submission Count'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column-instance column='[submission_date]' derivation='Month' name='[mn:submission_date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[submission_value]' derivation='None' name='[none:submission_value:ok]' pivot='key' type='ordinal' />
+            <column caption='Submission Date' datatype='datetime' name='[submission_date]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Submission Value' datatype='integer' name='[submission_value]' role='dimension' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]'>
+            <groupfilter function='level-members' level='[:Measure Names]' />
+          </filter>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='8' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]</rows>
+        <cols>([federated.13n482m1ckb55d1bhnope0eovquh].[mn:submission_date:ok] / [federated.13n482m1ckb55d1bhnope0eovquh].[none:submission_value:ok])</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Forgeant Dashboard'>
+      <style />
+      <size maxheight='600' maxwidth='800' minheight='600' minwidth='800' preset-index='3' sizing-mode='fixed' />
+      <datasources>
+        <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+      </datasources>
+      <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+        <column caption='Submission Date' datatype='datetime' name='[submission_date]' role='dimension' type='ordinal' />
+        <column-instance column='[submission_date]' derivation='Year' name='[yr:submission_date:ok]' pivot='key' type='ordinal' />
+      </datasource-dependencies>
+      <zones use-insets='false'>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='43334' id='6' param='horz' type='layout-flow' w='87875' x='1000' y='55333'>
+            <zone h='43334' id='4' type='layout-basic' w='87875' x='1000' y='55333'>
+              <zone h='43334' id='1' name='Average Monthly Rating' w='47862' x='1000' y='55333'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='43334' id='3' name='Rating Breakdown' w='36427' x='52448' y='55333'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='43334' id='12' type='empty' w='3586' x='48862' y='55333'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone h='48667' id='10' name='Submission Count' w='78125' x='1000' y='1333'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='160' h='48667' id='5' is-fixed='true' param='vert' type='layout-flow' w='19875' x='79125' y='1333'>
+            <zone h='11333' id='7' name='Rating Breakdown' param='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:submission_date:ok]' type='filter' w='19875' x='79125' y='1333'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone h='7666' id='9' name='Rating Breakdown' pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' type='size' w='19875' x='79125' y='12666'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+          </zone>
+          <zone h='5333' id='11' type='empty' w='98000' x='1000' y='50000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='32000' id='8' name='Rating Breakdown' pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:submission_value:ok]' type='color' w='10125' x='88875' y='66667'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='11334' id='13' type='empty' w='10125' x='88875' y='55333'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='dashboard' name='Forgeant Dashboard'>
+      <viewpoints>
+        <viewpoint name='Average Monthly Rating'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Rating Breakdown'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Submission Count'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+    </window>
+    <window class='worksheet' maximized='true' name='Submission Count'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='Average Monthly Rating'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='Rating Breakdown'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:submission_value:ok]' type='color' />
+            <card pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' type='size' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+</workbook>
