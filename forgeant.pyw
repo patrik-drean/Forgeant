@@ -74,11 +74,15 @@ def record_feeling_submission_to_db(feeling_response):
     # Developer printout
     print('The employee feeling response is: {}'.format(feeling_response))
 
+    # Grab employee id to record
+    with open('data/demographic_info.csv', newline='') as csvfile:
+        employee_id = [row for row in csv.reader(csvfile)][1][0]
+
     # Connect to database to record response
     query = """
                 INSERT INTO employee_submission (submission_value, submission_date, employee_id)
-                VALUES ({}, current_timestamp,  )
-            """.format(feeling_response)
+                VALUES ({}, current_timestamp,  '{}')
+            """.format(feeling_response, employee_id)
 
     cur.execute(query)
 
@@ -258,7 +262,7 @@ class SaveButton(Button):
                     'last_modified_date': today_date,
                     })
 
-            # SetupApp().stop()
+            SetupApp().stop()
 
 class FormDropDown(DropDown):
     pass
@@ -368,9 +372,8 @@ if __name__ == '__main__':
 
     # Run the normal app if the inital setup has already been completed
     if check_for_initial_setup():
-        # ForgeantApp().run()
-        SetupApp().run()
         ForgeantApp().run()
+        SetupApp().run()
     else:
         SetupApp().run()
         ForgeantApp().run()
