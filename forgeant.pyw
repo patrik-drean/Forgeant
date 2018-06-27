@@ -17,7 +17,6 @@ from uuid import getnode as get_mac
 import datetime
 
 
-
 ########################################################
 ################## General Variables  ##################
 ########################################################
@@ -373,7 +372,6 @@ if __name__ == '__main__':
     # Run the normal app if the inital setup has already been completed
     if check_for_initial_setup():
         ForgeantApp().run()
-        SetupApp().run()
     else:
         SetupApp().run()
         ForgeantApp().run()
@@ -382,4 +380,4 @@ if __name__ == '__main__':
 
 
 
-# 20.5 hours
+# 23.5 hours
