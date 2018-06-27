@@ -1,2 +1,2 @@
-,Name,Street,City,Country,Zipcode,Category,Description
-,hi,,,,,,
+id,company_id,mac_address,department_name,team_name,tenure_name,generation_name,manager_name,location_name,create_date,last_modified_date
+5,1,81363865636576,Production,Team 1,2-3 years,50+,Tom,Chicago,2018-06-26,2018-06-26

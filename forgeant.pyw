@@ -13,17 +13,36 @@ from kivy.uix.button import Button
 from kivy.base import runTouchApp
 from kivy.properties import ObjectProperty
 from kivy.uix.label import Label
+from uuid import getnode as get_mac
+import datetime
+
 
 
 ########################################################
-############### Window & database setup  ###############
+################## General Variables  ##################
 ########################################################
+db_name = 'incasokh'
+db_password = 'tmWwE8HPOYjJmAOymB16_vtNO2GILb1i'
 
-# Indicate position of app window
-# Window.left = 500
-# Window.top = 400
+# Test data
+category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
+dropdown_options_list = [
+    ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Team 1','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['2-3 years','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['50+','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Tom','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ]
+company_id = '1'
+
+today_date = datetime.datetime.now().today().strftime('%Y-%m-%d')
 
 pp = pprint.PrettyPrinter(indent=4)
+
+########################################################
+#################### Window setup  #####################
+########################################################
 
 # Set initial window size
 Window.size = (700, 350)
@@ -43,9 +62,9 @@ def record_feeling_submission_to_db(feeling_response):
 
     # Connect to database
     conn = psycopg2.connect(
-        database='incasokh',
-        user='incasokh',
-        password='tmWwE8HPOYjJmAOymB16_vtNO2GILb1i',
+        database=db_name,
+        user=db_name,
+        password=db_password,
         host='elmer.db.elephantsql.com',
         port='5432')
 
@@ -56,14 +75,12 @@ def record_feeling_submission_to_db(feeling_response):
     print('The employee feeling response is: {}'.format(feeling_response))
 
     # Connect to database to record response
-    query = """INSERT INTO employee_submission (submission_value, submission_date)
-        VALUES ({}, current_timestamp)""".format(feeling_response)
+    query = """
+                INSERT INTO employee_submission (submission_value, submission_date, employee_id)
+                VALUES ({}, current_timestamp,  )
+            """.format(feeling_response)
 
     cur.execute(query)
-
-    # cur.execute('select * from employee_submission;')
-    # x = cur.fetchall()
-    # pp.pprint(x)
 
     # Commit changes
     conn.commit()
@@ -78,32 +95,6 @@ def record_feeling_submission_to_db(feeling_response):
 # Check if file exists that already has demographic info
 def check_for_initial_setup():
     return os.path.exists('data/demographic_info.csv')
-
-# Prompt for employee information on first startup
-def run_initial_setup():
-    print('*' * 80)
-
-    # Create csv file
-    with open('data/demographic_info.csv', 'w', newline='') as csvfile:
-        fieldnames = [
-            '',
-            'Name',
-            'Street',
-            'City',
-            'Country',
-            'Zipcode',
-            'Category',
-            'Description',]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-
-        # Write each household to individual rows
-        writer.writerow({
-            'Name': 'hi',
-            })
-
-def initial_setup_submit():
-    print('hi')
 
 #######################################################
 ################# ForgeantApp Widgets #################
@@ -154,32 +145,18 @@ class ForgeantApp(App):
 ##################### SetupApp Widgets #####################
 ############################################################
 
+dropdown_list = {}
 dropdown_button_list = {}
-category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
-dropdown_options_list = [
-    ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Team 1','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['2-3 years','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['50+','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Tom','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ]
-
-def update_dropdown(btn, text):
-    btn.text = text
 
 class RootLayout(BoxLayout):
-    pass
-
-class HeaderLayout(Label):
     pass
 
 class SaveButton(Button):
 
     # Submit response if valid
     def on_press(self):
-        print()
         all_responses_valid = True
+
         for key, dropdown_button in dropdown_button_list.items():
 
             # Change text color if a response is not selected
@@ -190,9 +167,97 @@ class SaveButton(Button):
 
             print(dropdown_button.text)
 
-        # Submit signup response if valid
+        # Submit signup responses and create csv file if valid
         if all_responses_valid:
-            print('you did it!')
+            print('**************************************** \n')
+
+            # grab mac address
+            mac_address = get_mac()
+
+            ###################
+            # Grab next employee id from db
+            ###################
+
+            # Connect to database
+            conn = psycopg2.connect(
+                database=db_name,
+                user=db_name,
+                password=db_password,
+                host='elmer.db.elephantsql.com',
+                port='5432')
+
+            # Open cursor to interact with database
+            cur = conn.cursor()
+
+            # Connect to database to get next employee id
+            query = """
+                        select (max(id) + 1)
+                        from employee
+                    """
+
+            cur.execute(query)
+
+            employee_id = cur.fetchone()[0]
+
+            # Record employee in db
+            query = """
+                        insert into employee
+                        values({},'{}','{}','{}','{}','{}','{}', '{}','{}', '{}', '{}')
+                    """.format(
+                            employee_id,
+                            company_id,
+                            mac_address,
+                            dropdown_button_list['Department'].text,
+                            dropdown_button_list['Team'].text,
+                            dropdown_button_list['Tenure'].text,
+                            dropdown_button_list['Generation'].text,
+                            dropdown_button_list['Manager'].text,
+                            dropdown_button_list['Location'].text,
+                            today_date,
+                            today_date,
+                            )
+
+            cur.execute(query)
+
+            conn.commit()
+
+            # Close db connection
+            cur.close()
+            conn.close()
+
+            # Create csv file
+            with open('data/demographic_info.csv', 'w', newline='') as csvfile:
+                fieldnames = [
+                    'id',
+                    'company_id',
+                    'mac_address',
+                    'department_name',
+                    'team_name',
+                    'tenure_name',
+                    'generation_name',
+                    'manager_name',
+                    'location_name',
+                    'create_date',
+                    'last_modified_date',
+                    ]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+
+                # Write each household to individual rows
+                writer.writerow({
+                    'id': employee_id,
+                    'company_id': company_id,
+                    'mac_address': mac_address,
+                    'department_name': dropdown_button_list['Department'].text,
+                    'team_name': dropdown_button_list['Team'].text,
+                    'tenure_name': dropdown_button_list['Tenure'].text,
+                    'generation_name': dropdown_button_list['Generation'].text,
+                    'manager_name': dropdown_button_list['Manager'].text,
+                    'location_name': dropdown_button_list['Location'].text,
+                    'create_date': today_date,
+                    'last_modified_date': today_date,
+                    })
+
             # SetupApp().stop()
 
 class FormDropDown(DropDown):
@@ -208,12 +273,12 @@ class DropDownOptionButton(Button):
         dropdown_list[self.id].bind(
             on_select=lambda instance, x: setattr(dropdown_button_list[self.id], 'text', x)
             )
-        self.bind(on_release=lambda self: dropdown_list[self.id].select(self.text))
+        self.bind(
+            on_release=lambda self: dropdown_list[self.id].select(self.text)
+            )
 
-dropdown_list = {}
-
+# Create a dropdown for each category
 for category_index, category in enumerate(category_list):
-
 
     # Create dropdown and associated main button
     dropdown = FormDropDown()
@@ -305,19 +370,13 @@ if __name__ == '__main__':
     if check_for_initial_setup():
         # ForgeantApp().run()
         SetupApp().run()
-        # ForgeantApp().run()
+        ForgeantApp().run()
     else:
         SetupApp().run()
         ForgeantApp().run()
 
 
 
-# class LblTxt(BoxLayout):
-#     theTxt = ObjectProperty(None)
-#
-# class MyLayout(BoxLayout):
-#     pass
 
 
-
-# 17.5 hours
+# 20.5 hours
