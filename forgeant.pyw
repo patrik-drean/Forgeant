@@ -23,15 +23,15 @@ import datetime
 db_name = 'incasokh'
 db_password = 'tmWwE8HPOYjJmAOymB16_vtNO2GILb1i'
 
-# Test data
+# Test data TODO
 category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
 dropdown_options_list = [
     ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Team 1','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['2-3 years','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['50+','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Tom','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Chicago','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
+    ['Team 1','Team 2', 'Team 3',],
+    ['<1 year','2-3 years','4-5 years','5-10 years','10-20 years','20+ years',],
+    ['<18', '19-24', '25-34', '35-44', '45-54', '55+'],
+    ['Tommy','Alexander','Joey',],
+    ['Chicago','Boston','Provo',],
     ]
 company_id = '1'
 
@@ -59,41 +59,50 @@ Window.clearcolor = (1, 1, 1, 1)
 # Record response and close app in ForgeantApp
 def record_feeling_submission_to_db(feeling_response):
 
-    # Connect to database
-    conn = psycopg2.connect(
-        database=db_name,
-        user=db_name,
-        password=db_password,
-        host='elmer.db.elephantsql.com',
-        port='5432')
+    # catch exception if too many connections
+    try:    
 
-    # Open cursor to interact with database
-    cur = conn.cursor()
+        # Connect to database
+        conn = psycopg2.connect(
+            database=db_name,
+            user=db_name,
+            password=db_password,
+            host='elmer.db.elephantsql.com',
+            port='5432')
 
-    # Developer printout
-    print('The employee feeling response is: {}'.format(feeling_response))
+        # Open cursor to interact with database
+        cur = conn.cursor()
 
-    # Grab employee id to record
-    with open('data/demographic_info.csv', newline='') as csvfile:
-        employee_id = [row for row in csv.reader(csvfile)][1][0]
+        # Developer printout
+        print('The employee feeling response is: {}'.format(feeling_response))
 
-    # Connect to database to record response
-    query = """
-                INSERT INTO employee_submission (submission_value, submission_date, employee_id)
-                VALUES ({}, current_timestamp,  '{}')
-            """.format(feeling_response, employee_id)
+        # Grab employee id to record
+        with open('data/demographic_info.csv', newline='') as csvfile:
+            employee_id = [row for row in csv.reader(csvfile)][1][0]
 
-    cur.execute(query)
+        # Connect to database to record response
+        query = """
+                    INSERT INTO employee_submission (submission_value, submission_date, employee_id)
+                    VALUES ({}, current_timestamp,  '{}')
+                """.format(feeling_response, employee_id)
 
-    # Commit changes
-    conn.commit()
+        cur.execute(query)
 
-    # Close db connection
-    cur.close()
-    conn.close()
+        # Commit changes
+        conn.commit()
 
-    # Close app
-    ForgeantApp().stop()
+        # Close db connection
+        cur.close()
+        conn.close()
+
+        # Close app
+        ForgeantApp().stop()
+
+
+
+    # If too many connections, loop back
+    except psycopg2.OperationalError as e:
+        print(e.__class__.__name__)
 
 # Check if file exists that already has demographic info
 def check_for_initial_setup():

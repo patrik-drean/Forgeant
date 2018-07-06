@@ -1,0 +1,1478 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10500.18.0615.1128                               -->
+<workbook source-build='10.5.5 (10500.18.0615.1128)' source-platform='mac' version='10.5' xml:base='https://us-west-2b.online.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <repository-location id='forgeant_dashboard' path='/t/forgeant/workbooks' revision='1.3' site='forgeant' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='employee_submission (incasokh)' inline='true' name='federated.13n482m1ckb55d1bhnope0eovquh' version='10.5'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='elmer.db.elephantsql.com' name='postgres.18ufiau1s93pdw0zucoyx04suxh7'>
+            <connection authentication='username-password' class='postgres' dbname='incasokh' odbc-native-protocol='' one-time-sql='' port='5432' server='elmer.db.elephantsql.com' username='incasokh' workgroup-auth-mode='prompt' />
+          </named-connection>
+        </named-connections>
+        <relation connection='postgres.18ufiau1s93pdw0zucoyx04suxh7' name='Custom SQL Query' type='text'>select emp.id as &quot;Employee_ID&quot;,&#10;&#9;&#9;emp.company_id as &quot;Company_ID&quot;,&#10;&#9;&#9;emp.mac_address as &quot;Mac_Address&quot;,&#10;&#9;&#9;emp.department_name as &quot;Department&quot;,&#10;&#9;&#9;emp.team_name as &quot;Team&quot;,&#10;&#9;&#9;emp.tenure_name as &quot;Tenure&quot;,&#10;&#9;&#9;emp.generation_name as &quot;Generation&quot;,&#10;&#9;&#9;emp.manager_name as &quot;Manager&quot;,&#10;&#9;&#9;emp.location_name as &quot;Location&quot;,&#10;&#9;&#9;emp.create_date as &quot;Create_Date&quot;,&#10;&#9;&#9;emp.last_modified_date as &quot;Last_Modified_Date&quot;,&#10;&#9;&#9;emp_sub.id as &quot;Rating_ID&quot;,&#10;&#9;&#9;emp_sub.submission_value as &quot;Submission_Value&quot;,&#10;&#9;&#9;emp_sub.submission_date as &quot;Submission_Date&quot;&#10;&#9;&#9;&#10;&#10;from employee emp join employee_submission emp_sub on emp.id = emp_sub.employee_id</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Employee_ID</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[Employee_ID]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Employee_ID</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Company_ID</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[Company_ID]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Company_ID</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Mac_Address</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Mac_Address]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Mac_Address</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Department</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Department]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Department</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Team</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Team]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Team</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Tenure</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Tenure]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Tenure</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Generation</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Generation]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Generation</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Manager</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Manager]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Manager</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Location</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Location]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Location</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Create_Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Create_Date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Create_Date</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Last_Modified_Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Last_Modified_Date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Last_Modified_Date</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rating_ID</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[Rating_ID]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Rating_ID</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Submission_Value</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[Submission_Value]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Submission_Value</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Submission_Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Submission_Date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>Submission_Date</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_TIMESTAMP&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_TIMESTAMP&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Count of Submissions' datatype='integer' name='[Calculation_2721018601453305856]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{ FIXED [submission_value] : COUNT([Number of Records]) }' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column datatype='integer' name='[Submission_Value]' role='measure' type='quantitative' />
+      <column-instance column='[Submission_Value]' derivation='None' name='[none:Submission_Value:ok]' pivot='key' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.580038' measure-ordering='alphabetic' measure-percentage='0.419962' rowDisplayCount='200' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Submission_Value:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='incasokh' inline='true' name='federated.0swm6vv1fse0a81fjxtqs1t2hagg' version='10.5'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='elmer.db.elephantsql.com' name='postgres.1jmhlw5065a7zt17hkxi30krlycu'>
+            <connection authentication='username-password' class='postgres' dbname='incasokh' odbc-native-protocol='' one-time-sql='select emp.id as Employee_ID,&#10;&#9;&#9;emp.company_id as Company_ID,&#10;&#9;&#9;emp.mac_address as Mac_Address,&#10;&#9;&#9;emp.department_name as Department,&#10;&#9;&#9;emp.team_name as Team,&#10;&#9;&#9;emp.tenure_name as Tenure,&#10;&#9;&#9;emp.generation_name as Generation,&#10;&#9;&#9;emp.manager_name as Manager,&#10;&#9;&#9;emp.location_name as Location,&#10;&#9;&#9;emp.create_date as Create_Date,&#10;&#9;&#9;emp.last_modified_date as Last_Modified_Date,&#10;&#9;&#9;emp_sub.id as Rating_ID,&#10;&#9;&#9;emp_sub.submission_value as Submission_Value,&#10;&#9;&#9;emp_sub.submission_date as Submission_Date&#10;&#9;&#9;&#10;&#10;from employee emp join employee_submission emp_sub on emp.id = emp_sub.employee_id' port='5432' server='elmer.db.elephantsql.com' username='incasokh' />
+          </named-connection>
+        </named-connections>
+        <relation connection='postgres.1jmhlw5065a7zt17hkxi30krlycu' name='Custom SQL Query' type='text'>select emp.id as Employee_ID,&#10;&#9;&#9;emp.company_id as Company_ID,&#10;&#9;&#9;emp.mac_address as Mac_Address,&#10;&#9;&#9;emp.department_name as Department,&#10;&#9;&#9;emp.team_name as Team,&#10;&#9;&#9;emp.tenure_name as Tenure,&#10;&#9;&#9;emp.generation_name as Generation,&#10;&#9;&#9;emp.manager_name as Manager,&#10;&#9;&#9;emp.location_name as Location,&#10;&#9;&#9;emp.create_date as Create_Date,&#10;&#9;&#9;emp.last_modified_date as Last_Modified_Date,&#10;&#9;&#9;emp_sub.id as Rating_ID,&#10;&#9;&#9;emp_sub.submission_value as Submission_Value,&#10;&#9;&#9;emp_sub.submission_date as Submission_Date&#10;&#9;&#9;&#10;&#10;from employee emp join employee_submission emp_sub on emp.id = emp_sub.employee_id</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>employee_id</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[employee_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>employee_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>company_id</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[company_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>company_id</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mac_address</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[mac_address]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>mac_address</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>department</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[department]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>department</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>team</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[team]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>team</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tenure</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tenure]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tenure</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>generation</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[generation]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>generation</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>manager</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[manager]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>manager</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[location]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>location</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>8190</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>create_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[create_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>create_date</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>last_modified_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[last_modified_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>last_modified_date</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rating_id</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[rating_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>rating_id</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submission_value</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[submission_value]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>submission_value</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submission_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[submission_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>submission_date</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_TIMESTAMP&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_TIMESTAMP&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <extract count='-1' enabled='false' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/patrikdrean/Documents/My Tableau Repository/Datasources/incasokh.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='07/02/2018 12:37:07 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='' increment-value='%null%' refresh-type='create' rows-inserted='66' timestamp-start='2018-07-02 12:37:07.122' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>employee_id</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[employee_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>employee_id</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>company_id</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[company_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>company_id</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>mac_address</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[mac_address]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>mac_address</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>department</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[department]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>department</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>team</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[team]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>team</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>tenure</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[tenure]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>tenure</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>generation</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[generation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>generation</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>manager</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[manager]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>manager</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>location</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>create_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[create_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>create_date</remote-alias>
+              <ordinal>9</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>last_modified_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[last_modified_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>last_modified_date</remote-alias>
+              <ordinal>10</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>rating_id</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[rating_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>rating_id</remote-alias>
+              <ordinal>11</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>66</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>submission_value</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[submission_value]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>submission_value</remote-alias>
+              <ordinal>12</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>submission_date</remote-name>
+              <remote-type>135</remote-type>
+              <local-name>[submission_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>submission_date</remote-alias>
+              <ordinal>13</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>datetime</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>66</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.59887' measure-ordering='alphabetic' measure-percentage='0.40113' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <shared-views>
+    <shared-view name='federated.13n482m1ckb55d1bhnope0eovquh'>
+      <datasources>
+        <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+      </datasources>
+      <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+        <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+        <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]'>
+        <groupfilter function='level-members' level='[none:Department:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+        <target field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]' />
+      </filter>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]'>
+        <groupfilter function='member' level='[none:Generation:nk]' member='&quot;25-34&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]'>
+        <groupfilter function='level-members' level='[none:Location:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]'>
+        <groupfilter function='level-members' level='[none:Manager:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]'>
+        <groupfilter function='level-members' level='[none:Team:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+      <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]'>
+        <groupfilter function='level-members' level='[none:Tenure:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+      </filter>
+    </shared-view>
+  </shared-views>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='Rating Breakdown' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Submission Value' />
+        <param name='target' value='Rating Breakdown' />
+      </command>
+    </action>
+    <action caption='Highlight 1 (generated)' name='[Action2]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='Rating Crosstab' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Submission Value' />
+        <param name='target' value='Rating Crosstab' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='Average Monthly Rating'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+            <column datatype='datetime' name='[Submission_Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Submission_Value]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+            <column-instance column='[Submission_Value]' derivation='Avg' name='[avg:Submission_Value:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Submission_Date]' derivation='Month' name='[mn:Submission_Date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]'>
+            <groupfilter function='level-members' level='[:Measure Names]' />
+          </filter>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]'>
+            <groupfilter function='level-members' level='[mn:Submission_Date:ok]' />
+          </filter>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]' value='Department'>
+              <formatted-text>
+                <run fontalignment='1'>Department</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]' value='Generation'>
+              <formatted-text>
+                <run fontalignment='1'>Generation</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]' value='Location'>
+              <formatted-text>
+                <run fontalignment='1'>Location</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]' value='Manager'>
+              <formatted-text>
+                <run fontalignment='1'>Manager</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]' value='Team'>
+              <formatted-text>
+                <run fontalignment='1'>Team</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]' value='Tenure'>
+              <formatted-text>
+                <run fontalignment='1'>Tenure</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]</rows>
+        <cols>[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Rating Breakdown'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column datatype='datetime' name='[Submission_Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Submission_Value]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+            <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Submission_Value]' derivation='None' name='[none:Submission_Value:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[pcto:sum:Number of Records:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Columns' type='PctTotal' />
+            </column-instance>
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Submission_Date]' derivation='Year' name='[yr:Submission_Date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.13n482m1ckb55d1bhnope0eovquh].[pcto:sum:Number of Records:qk]' value='p0.0%' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]' value='false' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='color' value='#898989' />
+            <format attr='font-size' value='8' />
+            <format attr='text-align' value='center' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <encodings>
+              <color column='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:ok]' />
+              <wedge-size column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+              <size column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[pcto:sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]</rows>
+        <cols />
+      </table>
+    </worksheet>
+    <worksheet name='Rating Count'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column datatype='datetime' name='[Submission_Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Submission_Value]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+            <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Submission_Value]' derivation='None' name='[none:Submission_Value:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Submission_Date]' derivation='Year' name='[yr:Submission_Date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]'>
+            <groupfilter function='level-members' level='[:Measure Names]' />
+          </filter>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[:Measure Names]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='height' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:qk]' value='57' />
+            <encoding attr='space' class='0' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:qk]' field-type='quantitative' max='6' min='0' range-type='fixed' scope='cols' type='space' />
+            <format attr='subtitle' class='0' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:qk]' scope='cols' value='' />
+            <format attr='auto-subtitle' class='0' field='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:qk]' scope='cols' value='true' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='8' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='582' />
+                <format attr='maxwidth' value='582' />
+                <format attr='minheight' value='456' />
+                <format attr='maxheight' value='456' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]</rows>
+        <cols>([federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok] * [federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:qk])</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Rating Crosstab'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+            <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+            <column datatype='datetime' name='[Submission_Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Submission_Value]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+            <column-instance column='[Submission_Value]' derivation='Avg' name='[avg:Submission_Value:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Submission_Date]' derivation='Month' name='[mn:Submission_Date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Submission_Date]' derivation='Year' name='[yr:Submission_Date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]'>
+            <groupfilter function='level-members' level='[mn:Submission_Date:ok]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]'>
+            <groupfilter function='member' level='[yr:Submission_Date:ok]' member='2018' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]</column>
+            <column>[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' value='n#,##0.00;-#,##0.00' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+            <encoding attr='color' center='3.0' field='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' max='5.0' min='1.0' palette='red_green_diverging_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]' value='Year'>
+              <formatted-text>
+                <run fontcolor='#000000' fontsize='9'>Year</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]' value='Month'>
+              <formatted-text>
+                <run fontcolor='#000000' fontsize='9'>Month</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='color' value='#898989' />
+            <format attr='font-size' value='8' />
+            <format attr='text-align' value='center' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' />
+              <text column='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+                <format attr='has-stroke' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]</rows>
+        <cols>[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Forgeant Dashboard'>
+      <style />
+      <size maxheight='600' maxwidth='800' minheight='600' minwidth='800' preset-index='3' sizing-mode='fixed' />
+      <datasources>
+        <datasource caption='employee_submission (incasokh)' name='federated.13n482m1ckb55d1bhnope0eovquh' />
+      </datasources>
+      <datasource-dependencies datasource='federated.13n482m1ckb55d1bhnope0eovquh'>
+        <column datatype='string' name='[Department]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Generation]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Manager]' role='dimension' type='nominal' />
+        <column datatype='datetime' name='[Submission_Date]' role='dimension' type='ordinal' />
+        <column datatype='string' name='[Team]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Tenure]' role='dimension' type='nominal' />
+        <column-instance column='[Submission_Date]' derivation='Month' name='[mn:Submission_Date:ok]' pivot='key' type='ordinal' />
+        <column-instance column='[Department]' derivation='None' name='[none:Department:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Generation]' derivation='None' name='[none:Generation:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Manager]' derivation='None' name='[none:Manager:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Tenure]' derivation='None' name='[none:Tenure:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Submission_Date]' derivation='Year' name='[yr:Submission_Date:ok]' pivot='key' type='ordinal' />
+      </datasource-dependencies>
+      <zones use-insets='false'>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='97334' id='25' param='horz' type='layout-flow' w='98000' x='1000' y='1333'>
+            <zone h='97334' id='23' param='horz' type='layout-flow' w='98000' x='1000' y='1333'>
+              <zone h='97334' id='16' param='horz' type='layout-flow' w='98000' x='1000' y='1333'>
+                <zone h='97334' id='14' type='layout-basic' w='98000' x='1000' y='1333'>
+                  <zone h='43334' id='6' param='horz' type='layout-flow' w='92625' x='1000' y='55333'>
+                    <zone h='43334' id='4' type='layout-basic' w='92625' x='1000' y='55333'>
+                      <zone h='43334' id='1' name='Average Monthly Rating' w='56625' x='1000' y='55333'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                      <zone h='43334' id='3' name='Rating Breakdown' w='36000' x='57625' y='55333'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                    </zone>
+                  </zone>
+                  <zone h='5333' id='11' type='empty' w='98000' x='1000' y='50000'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='21667' id='8' name='Rating Breakdown' pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:ok]' show-title='false' type='color' w='5375' x='93625' y='77000'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='21667' id='19' type='empty' w='5375' x='93625' y='55333'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='48667' id='21' name='Rating Crosstab' w='74000' x='1000' y='1333'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='48667' id='31' param='vert' type='layout-flow' w='24000' x='75000' y='1333'>
+                    <zone h='6083' id='33' mode='checkdropdown' name='Rating Crosstab' param='[federated.13n482m1ckb55d1bhnope0eovquh].[yr:Submission_Date:ok]' show-apply='true' type='filter' w='24000' x='75000' y='1333'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='32' mode='checkdropdown' name='Rating Crosstab' param='[federated.13n482m1ckb55d1bhnope0eovquh].[mn:Submission_Date:ok]' show-apply='true' type='filter' w='24000' x='75000' y='7416'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='17' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]' show-apply='true' type='filter' w='24000' x='75000' y='13499'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='26' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]' show-apply='true' type='filter' w='24000' x='75000' y='19582'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='27' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]' show-apply='true' type='filter' w='24000' x='75000' y='25665'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='28' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]' show-apply='true' type='filter' w='24000' x='75000' y='31748'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6083' id='29' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]' show-apply='true' type='filter' w='24000' x='75000' y='37831'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='6086' id='30' mode='checkdropdown' name='Average Monthly Rating' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Tenure:nk]' show-apply='true' type='filter' w='24000' x='75000' y='43914'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                  </zone>
+                </zone>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+  <windows source-height='51'>
+    <window class='dashboard' maximized='true' name='Forgeant Dashboard'>
+      <viewpoints>
+        <viewpoint name='Average Monthly Rating'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Rating Breakdown'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Rating Crosstab' />
+      </viewpoints>
+      <active id='-1' />
+    </window>
+    <window class='worksheet' name='Rating Count'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Team:nk]' type='filter' />
+            <card param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Manager:nk]' type='filter' />
+            <card param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Location:nk]' type='filter' />
+            <card param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Generation:nk]' type='filter' />
+            <card param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Department:nk]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='Average Monthly Rating'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='Rating Breakdown'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[none:Submission_Value:ok]' type='color' />
+            <card pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[sum:Number of Records:qk]' type='size' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='Rating Crosstab'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.13n482m1ckb55d1bhnope0eovquh].[avg:Submission_Value:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+</workbook>
