@@ -59,9 +59,12 @@ Window.clearcolor = (1, 1, 1, 1)
 # Record response and close app in ForgeantApp
 def record_feeling_submission_to_db(feeling_response):
 
-    # catch exception if too many connections
-    try:    
+    # Grab employee id to record
+    with open('data/demographic_info.csv', newline='') as csvfile:
+        employee_id = [row for row in csv.reader(csvfile)][1][0]
 
+    # catch exception if too many connections
+    try:
         # Connect to database
         conn = psycopg2.connect(
             database=db_name,
@@ -73,12 +76,118 @@ def record_feeling_submission_to_db(feeling_response):
         # Open cursor to interact with database
         cur = conn.cursor()
 
+        # If employee has not been saved to db, update it
+        if employee_id == '-1':
+
+            # Connect to database to get next employee id
+            query = """
+                        select (max(id) + 1)
+                        from employee
+                    """
+
+            cur.execute(query)
+
+            employee_id = cur.fetchone()[0]
+
+
+            # Grab cached employee row by row
+            with open('data/demographic_info.csv', newline='') as csvfile:
+                for row in csv.reader(csvfile):
+                    company_id = row[1]
+                    mac_address = row[2]
+                    department = row[3]
+                    team = row[4]
+                    tenure = row[5]
+                    generation = row[6]
+                    manager = row[7]
+                    location = row[8]
+                    create_date = row[9]
+                    modified_date = row[10]
+
+            # Record employee in db
+            query = """
+                        insert into employee
+                        values({},'{}','{}','{}','{}','{}','{}', '{}','{}', '{}', '{}')
+                    """.format(
+                            employee_id,
+                            company_id,
+                            mac_address,
+                            department,
+                            team,
+                            tenure,
+                            generation,
+                            manager,
+                            location,
+                            create_date,
+                            today_date,
+                            )
+
+            cur.execute(query)
+
+            # Commit changes
+            conn.commit()
+
+            # Update csv file
+            with open('data/demographic_info.csv', 'w', newline='') as csvfile:
+                fieldnames = [
+                    'id',
+                    'company_id',
+                    'mac_address',
+                    'department_name',
+                    'team_name',
+                    'tenure_name',
+                    'generation_name',
+                    'manager_name',
+                    'location_name',
+                    'create_date',
+                    'last_modified_date',
+                    ]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+
+                # Write each household to individual rows
+                writer.writerow({
+                    'id': employee_id,
+                    'company_id': company_id,
+                    'mac_address': mac_address,
+                    'department_name': department,
+                    'team_name': team,
+                    'tenure_name': tenure,
+                    'generation_name': generation,
+                    'manager_name': manager,
+                    'location_name': location,
+                    'create_date': create_date,
+                    'last_modified_date': today_date,
+                    })
+
+
+
+        # Upload any cached_submissions if they exist
+        if os.path.exists('data/cached_submissions.csv'):
+
+            # Grab cached submission row by row
+            with open('data/cached_submissions.csv', newline='') as csvfile:
+                for row in csv.reader(csvfile):
+                    cached_feeling_response = row[0]
+                    cached_date = row[1]
+                    cached_employee_id = row[2]
+
+                    # Connect to database to record response
+                    query = """
+                                INSERT INTO employee_submission (submission_value, submission_date, employee_id)
+                                VALUES ({}, '{}',  '{}')
+                            """.format(cached_feeling_response, cached_date, cached_employee_id)
+
+                    cur.execute(query)
+
+                    # Commit changes
+                    conn.commit()
+
+            # Delete csv file
+            os.remove('data/cached_submissions.csv')
+
         # Developer printout
         print('The employee feeling response is: {}'.format(feeling_response))
-
-        # Grab employee id to record
-        with open('data/demographic_info.csv', newline='') as csvfile:
-            employee_id = [row for row in csv.reader(csvfile)][1][0]
 
         # Connect to database to record response
         query = """
@@ -98,11 +207,24 @@ def record_feeling_submission_to_db(feeling_response):
         # Close app
         ForgeantApp().stop()
 
-
-
-    # If too many connections, loop back
+    # If too many connections write to csv file to be uploaded later
     except psycopg2.OperationalError as e:
-        print(e.__class__.__name__)
+
+        if employee_id != '-1':
+
+            # Create csv file
+            new_row = [feeling_response, datetime.datetime.now().today(), employee_id]
+            with open('data/cached_submissions.csv', 'a', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+
+                # Write cached response to csv file
+                writer.writerow(new_row)
+
+        print('Database has too many connections. Submsission not recorded.')
+
+        # Close app
+        ForgeantApp().stop()
+
 
 # Check if file exists that already has demographic info
 def check_for_initial_setup():
@@ -181,7 +303,6 @@ class SaveButton(Button):
 
         # Submit signup responses and create csv file if valid
         if all_responses_valid:
-            print('**************************************** \n')
 
             # grab mac address
             mac_address = get_mac()
@@ -190,52 +311,57 @@ class SaveButton(Button):
             # Grab next employee id from db
             ###################
 
-            # Connect to database
-            conn = psycopg2.connect(
-                database=db_name,
-                user=db_name,
-                password=db_password,
-                host='elmer.db.elephantsql.com',
-                port='5432')
+            try:
+                # Connect to database
+                conn = psycopg2.connect(
+                    database=db_name,
+                    user=db_name,
+                    password=db_password,
+                    host='elmer.db.elephantsql.com',
+                    port='5432')
 
-            # Open cursor to interact with database
-            cur = conn.cursor()
+                # Open cursor to interact with database
+                cur = conn.cursor()
 
-            # Connect to database to get next employee id
-            query = """
-                        select (max(id) + 1)
-                        from employee
-                    """
+                # Connect to database to get next employee id
+                query = """
+                            select (max(id) + 1)
+                            from employee
+                        """
 
-            cur.execute(query)
+                cur.execute(query)
 
-            employee_id = cur.fetchone()[0]
+                employee_id = cur.fetchone()[0]
 
-            # Record employee in db
-            query = """
-                        insert into employee
-                        values({},'{}','{}','{}','{}','{}','{}', '{}','{}', '{}', '{}')
-                    """.format(
-                            employee_id,
-                            company_id,
-                            mac_address,
-                            dropdown_button_list['Department'].text,
-                            dropdown_button_list['Team'].text,
-                            dropdown_button_list['Tenure'].text,
-                            dropdown_button_list['Generation'].text,
-                            dropdown_button_list['Manager'].text,
-                            dropdown_button_list['Location'].text,
-                            today_date,
-                            today_date,
-                            )
+                # Record employee in db
+                query = """
+                            insert into employee
+                            values({},'{}','{}','{}','{}','{}','{}', '{}','{}', '{}', '{}')
+                        """.format(
+                                employee_id,
+                                company_id,
+                                mac_address,
+                                dropdown_button_list['Department'].text,
+                                dropdown_button_list['Team'].text,
+                                dropdown_button_list['Tenure'].text,
+                                dropdown_button_list['Generation'].text,
+                                dropdown_button_list['Manager'].text,
+                                dropdown_button_list['Location'].text,
+                                today_date,
+                                today_date,
+                                )
 
-            cur.execute(query)
+                cur.execute(query)
 
-            conn.commit()
+                conn.commit()
 
-            # Close db connection
-            cur.close()
-            conn.close()
+                # Close db connection
+                cur.close()
+                conn.close()
+
+            # Assign an id as a flag if db error
+            except psycopg2.OperationalError as e:
+                employee_id = -1
 
             # Create csv file
             with open('data/demographic_info.csv', 'w', newline='') as csvfile:
