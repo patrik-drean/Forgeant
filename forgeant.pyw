@@ -26,12 +26,12 @@ db_password = 'tmWwE8HPOYjJmAOymB16_vtNO2GILb1i'
 # Test data TODO
 category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
 dropdown_options_list = [
-    ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin',],
-    ['Team 1','Team 2', 'Team 3',],
-    ['<1 year','2-3 years','4-5 years','5-10 years','10-20 years','20+ years',],
-    ['<18', '19-24', '25-34', '35-44', '45-54', '55+'],
-    ['Tommy','Alexander','Joey',],
-    ['Chicago','Boston','Provo',],
+    ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin', 'Other'],
+    ['Team 1','Team 2', 'Team 3','Other'],
+    ['<1 year','2-3 years','4-5 years','5-10 years','10-20 years','20+ years','Other'],
+    ['<18', '19-24', '25-34', '35-44', '45-54', '55+', 'Other'],
+    ['Tommy','Alexander','Joey', 'Other'],
+    ['Chicago','Boston','Provo', 'Other'],
     ]
 company_id = '1'
 
@@ -89,7 +89,6 @@ def record_feeling_submission_to_db(feeling_response):
 
             employee_id = cur.fetchone()[0]
 
-
             # Grab cached employee row by row
             with open('data/demographic_info.csv', newline='') as csvfile:
                 for row in csv.reader(csvfile):
@@ -145,7 +144,7 @@ def record_feeling_submission_to_db(feeling_response):
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
 
-                # Write each household to individual rows
+                # Write employee to row
                 writer.writerow({
                     'id': employee_id,
                     'company_id': company_id,
@@ -160,17 +159,19 @@ def record_feeling_submission_to_db(feeling_response):
                     'last_modified_date': today_date,
                     })
 
-
-
         # Upload any cached_submissions if they exist
         if os.path.exists('data/cached_submissions.csv'):
 
-            # Grab cached submission row by row
+            # Grab cached submission row by row and update in db
             with open('data/cached_submissions.csv', newline='') as csvfile:
                 for row in csv.reader(csvfile):
                     cached_feeling_response = row[0]
                     cached_date = row[1]
                     cached_employee_id = row[2]
+
+                    # change employee id if it wasn't set prior
+                    if cached_employee_id == '-1':
+                        cached_employee_id = employee_id
 
                     # Connect to database to record response
                     query = """
@@ -210,17 +211,15 @@ def record_feeling_submission_to_db(feeling_response):
     # If too many connections write to csv file to be uploaded later
     except psycopg2.OperationalError as e:
 
-        if employee_id != '-1':
+        # Create csv file
+        new_row = [feeling_response, datetime.datetime.now().today(), employee_id]
+        with open('data/cached_submissions.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
 
-            # Create csv file
-            new_row = [feeling_response, datetime.datetime.now().today(), employee_id]
-            with open('data/cached_submissions.csv', 'a', newline='') as csvfile:
-                writer = csv.writer(csvfile)
+            # Write cached response to csv file
+            writer.writerow(new_row)
 
-                # Write cached response to csv file
-                writer.writerow(new_row)
-
-        print('Database has too many connections. Submsission not recorded.')
+        print('Database has too many connections. Submsission will not be recorded until later.')
 
         # Close app
         ForgeantApp().stop()
@@ -515,4 +514,4 @@ if __name__ == '__main__':
 
 
 
-# 23.5 hours
+# 29 hours
