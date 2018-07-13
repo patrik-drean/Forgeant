@@ -24,7 +24,7 @@ db_name = 'incasokh'
 db_password = 'tmWwE8HPOYjJmAOymB16_vtNO2GILb1i'
 
 # Test data TODO
-category_list = ['Department','Team','Tenure', 'Generation','Manager','Location',]
+category_list = ['Department','Team','Tenure', 'Age','Manager','Location',]
 dropdown_options_list = [
     ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin', 'Other'],
     ['Team 1','Team 2', 'Team 3','Other'],
@@ -97,7 +97,7 @@ def record_feeling_submission_to_db(feeling_response):
                     department = row[3]
                     team = row[4]
                     tenure = row[5]
-                    generation = row[6]
+                    age = row[6]
                     manager = row[7]
                     location = row[8]
                     create_date = row[9]
@@ -114,7 +114,7 @@ def record_feeling_submission_to_db(feeling_response):
                             department,
                             team,
                             tenure,
-                            generation,
+                            age,
                             manager,
                             location,
                             create_date,
@@ -135,7 +135,7 @@ def record_feeling_submission_to_db(feeling_response):
                     'department_name',
                     'team_name',
                     'tenure_name',
-                    'generation_name',
+                    'age_name',
                     'manager_name',
                     'location_name',
                     'create_date',
@@ -152,7 +152,7 @@ def record_feeling_submission_to_db(feeling_response):
                     'department_name': department,
                     'team_name': team,
                     'tenure_name': tenure,
-                    'generation_name': generation,
+                    'age_name': age,
                     'manager_name': manager,
                     'location_name': location,
                     'create_date': create_date,
@@ -343,7 +343,7 @@ class SaveButton(Button):
                                 dropdown_button_list['Department'].text,
                                 dropdown_button_list['Team'].text,
                                 dropdown_button_list['Tenure'].text,
-                                dropdown_button_list['Generation'].text,
+                                dropdown_button_list['Age'].text,
                                 dropdown_button_list['Manager'].text,
                                 dropdown_button_list['Location'].text,
                                 today_date,
@@ -371,7 +371,7 @@ class SaveButton(Button):
                     'department_name',
                     'team_name',
                     'tenure_name',
-                    'generation_name',
+                    'age_name',
                     'manager_name',
                     'location_name',
                     'create_date',
@@ -388,7 +388,7 @@ class SaveButton(Button):
                     'department_name': dropdown_button_list['Department'].text,
                     'team_name': dropdown_button_list['Team'].text,
                     'tenure_name': dropdown_button_list['Tenure'].text,
-                    'generation_name': dropdown_button_list['Generation'].text,
+                    'age_name': dropdown_button_list['Age'].text,
                     'manager_name': dropdown_button_list['Manager'].text,
                     'location_name': dropdown_button_list['Location'].text,
                     'create_date': today_date,
@@ -490,7 +490,7 @@ class SetupApp(App, BoxLayout):
                         text='Submit',
                         id='submission',
                         background_normal = '',
-                        background_color = (.1, .3, .8, 1),
+                        background_color = (.2, .2, .2, 1),
                         )
         dropdown_layout.add_widget(save_button)
         dropdown_layout.add_widget(Label())
@@ -514,4 +514,4 @@ if __name__ == '__main__':
 
 
 
-# 29 hours
+# 31 hours
