@@ -1,11 +1,10 @@
-import psycopg2, pprint, os.path, csv
+import psycopg2, pprint, os.path, csv, datetime, schedule, time
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.image import Image
 from kivy.graphics import Color, Ellipse
 from kivy.core.window import Window
 from kivy.config import Config
-from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.uix.dropdown import DropDown
@@ -14,7 +13,7 @@ from kivy.base import runTouchApp
 from kivy.properties import ObjectProperty
 from kivy.uix.label import Label
 from uuid import getnode as get_mac
-import datetime
+
 
 
 ########################################################
@@ -501,17 +500,25 @@ class SetupApp(App, BoxLayout):
 ####### Main method to actually run the apps #######
 ####################################################
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    # Run the normal app if the inital setup has already been completed
-    if check_for_initial_setup():
-        ForgeantApp().run()
-    else:
-        SetupApp().run()
-        ForgeantApp().run()
+    # # Run on timer
+    # def job(t):
+    #     print ("I'm working..."), t
+    #     return
+    #
+    # schedule.every().day.at("21:11").do(job,'It is 01:00')
+    #
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(20) # wait one minute
 
+# def run_app():
+#     # Run the normal app if the inital setup has already been completed
+if check_for_initial_setup():
+    ForgeantApp().run()
+else:
+    SetupApp().run()
+    ForgeantApp().run()
 
-
-
-
-# 31 hours
+# 34 hours
