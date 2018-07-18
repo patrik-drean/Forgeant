@@ -3,7 +3,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.image import Image
 from kivy.graphics import Color, Ellipse
-from kivy.core.window import Window
+from kivy.core import window
 from kivy.config import Config
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
@@ -28,7 +28,7 @@ dropdown_options_list = [
     ['Production','Research and Development','Purchasing','Marketing','Sales','Human Resources','Accounting and Finance','Admin', 'Other'],
     ['Team 1','Team 2', 'Team 3','Other'],
     ['<1 year','2-3 years','4-5 years','5-10 years','10-20 years','20+ years','Other'],
-    ['<18', '19-24', '25-34', '35-44', '45-54', '55+', 'Other'],
+    ['<18', '19-24', '25-34', '35-44', '45-54', '55+'],
     ['Tommy','Alexander','Joey', 'Other'],
     ['Chicago','Boston','Provo', 'Other'],
     ]
@@ -43,13 +43,13 @@ pp = pprint.PrettyPrinter(indent=4)
 ########################################################
 
 # Set initial window size
-Window.size = (700, 350)
+window.Window.size = (700, 350)
 
 # Turn off ability to exit screen
-Window.borderless = True
+window.Window.borderless = True
 
 # Turn background clear
-Window.clearcolor = (1, 1, 1, 1)
+window.Window.clearcolor = (1, 1, 1, 1)
 
 #################################################################
 ###################### Methods to be called #####################
@@ -450,7 +450,7 @@ class SetupApp(App, BoxLayout):
     def build(self):
 
         # Window size
-        Window.size = (800, 600)
+        window.Window.size = (800, 600)
 
         # Layouts
         root = RootLayout()
@@ -521,4 +521,4 @@ else:
     SetupApp().run()
     ForgeantApp().run()
 
-# 34 hours
+# 38 hours
